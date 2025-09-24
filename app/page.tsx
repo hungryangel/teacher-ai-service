@@ -12,10 +12,10 @@ export default function HomePage() {
           </div>
           <div className="flex space-x-6">
             <Link href="/onboarding" className="text-gray-600 hover:text-blue-600 transition">
-              Get Started
+              시작하기
             </Link>
             <Link href="/experience" className="text-gray-600 hover:text-blue-600 transition">
-              Try Demo
+              체험하기
             </Link>
           </div>
         </div>
@@ -25,7 +25,7 @@ export default function HomePage() {
       <div className="container mx-auto px-4 py-16">
         <div className="text-center">
           <h1 className="text-5xl font-bold text-gray-900 mb-6">
-            AI-Powered Teacher Service
+            AI 기반 교육 서비스
           </h1>
           <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
             혁신적인 AI 기반 교육 서비스로 개인화된 학습 경험과 모듈식 평가 시스템을 제공합니다
@@ -38,10 +38,10 @@ export default function HomePage() {
                 <span className="text-2xl font-bold text-blue-600">1</span>
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Landing</h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 mb-4">
                 AI 기반 교육 플랫폼에 오신 것을 환영합니다. 지능적인 평가 도구와 개인화된 학습 경험을 발견하세요.
               </p>
-              <Link href="/" className="inline-block mt-4 text-blue-600 font-semibold hover:text-blue-700">
+              <Link href="/" className="inline-block text-blue-600 font-semibold hover:text-blue-700">
                 현재 페이지 →
               </Link>
             </div>
@@ -51,10 +51,10 @@ export default function HomePage() {
                 <span className="text-2xl font-bold text-green-600">2</span>
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Onboarding</h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 mb-4">
                 직관적인 설정 과정으로 시작하세요. 교육 선호도와 평가 기준을 설정할 수 있습니다.
               </p>
-              <Link href="/onboarding" className="inline-block mt-4 text-green-600 font-semibold hover:text-green-700">
+              <Link href="/onboarding" className="inline-block text-green-600 font-semibold hover:text-green-700">
                 시작하기 →
               </Link>
             </div>
@@ -64,10 +64,10 @@ export default function HomePage() {
                 <span className="text-2xl font-bold text-purple-600">3</span>
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Experience</h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 mb-4">
                 AI 보조 교육의 모든 기능을 체험해보세요. 모듈식 평가 시스템과 실시간 인사이트를 경험하세요.
               </p>
-              <Link href="/experience" className="inline-block mt-4 text-purple-600 font-semibold hover:text-purple-700">
+              <Link href="/experience" className="inline-block text-purple-600 font-semibold hover:text-purple-700">
                 체험하기 →
               </Link>
             </div>
@@ -81,25 +81,33 @@ export default function HomePage() {
                 <h4 className="text-xl font-semibold text-gray-900 mb-3 flex items-center">
                   <span className="mr-3">🤖</span> AI 기반 평가
                 </h4>
-                <p className="text-gray-600">고급 AI 알고리즘이 학생 작업에 대한 지능적인 평가와 피드백을 제공합니다.</p>
+                <p className="text-gray-600">
+                  고급 AI 알고리즘이 학생 작업에 대한 지능적인 평가와 피드백을 제공합니다.
+                </p>
               </div>
               <div className="text-left">
                 <h4 className="text-xl font-semibold text-gray-900 mb-3 flex items-center">
                   <span className="mr-3">📊</span> 모듈식 시스템
                 </h4>
-                <p className="text-gray-600">유연한 모듈식 아키텍처로 맞춤형 평가 워크플로우를 구성할 수 있습니다.</p>
+                <p className="text-gray-600">
+                  유연한 모듈식 아키텍처로 맞춤형 평가 워크플로우를 구성할 수 있습니다.
+                </p>
               </div>
               <div className="text-left">
                 <h4 className="text-xl font-semibold text-gray-900 mb-3 flex items-center">
                   <span className="mr-3">🎯</span> 개인화 학습
                 </h4>
-                <p className="text-gray-600">개별 학생의 요구사항과 진도에 기반한 맞춤형 교육 경험을 제공합니다.</p>
+                <p className="text-gray-600">
+                  개별 학생의 요구사항과 진도에 기반한 맞춤형 교육 경험을 제공합니다.
+                </p>
               </div>
               <div className="text-left">
                 <h4 className="text-xl font-semibold text-gray-900 mb-3 flex items-center">
                   <span className="mr-3">📈</span> 실시간 분석
                 </h4>
-                <p className="text-gray-600">학생 성과 추적을 위한 포괄적인 대시보드와 분석 도구를 제공합니다.</p>
+                <p className="text-gray-600">
+                  학생 성과 추적을 위한 포괄적인 대시보드와 분석 도구를 제공합니다.
+                </p>
               </div>
             </div>
           </div>
