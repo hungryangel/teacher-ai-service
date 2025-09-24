@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -15,17 +14,16 @@ export default function OnboardingPage() {
     assessmentPreferences: {
       automated: false,
       manual: false,
-      mixed: true
+      mixed: true,
     },
-    goals: []
+    goals: [] as string[],
   });
-
   const totalSteps = 4;
 
   const handleInputChange = (field: string, value: any) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   };
 
@@ -34,15 +32,15 @@ export default function OnboardingPage() {
       setCurrentStep(currentStep + 1);
     } else {
       // Complete onboarding
-      localStorage.setItem('teacherOnboarding', JSON.stringify(formData));
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('teacherOnboarding', JSON.stringify(formData));
+      }
       router.push('/experience');
     }
   };
 
   const handlePrevious = () => {
-    if (currentStep > 1) {
-      setCurrentStep(currentStep - 1);
-    }
+    if (currentStep > 1) setCurrentStep(currentStep - 1);
   };
 
   const renderStep = () => {
@@ -51,18 +49,12 @@ export default function OnboardingPage() {
         return (
           <div className="space-y-6">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                기본 정보를 알려주세요
-              </h2>
-              <p className="text-gray-600">
-                개인화된 AI 교육 경험을 위해 몇 가지 정보가 필요합니다.
-              </p>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">기본 정보를 알려주세요</h2>
+              <p className="text-gray-600">개인화된 AI 교육 경험을 위해 몇 가지 정보가 필요합니다.</p>
             </div>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  선생님 성함
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">선생님 성함</label>
                 <input
                   type="text"
                   value={formData.teacherName}
@@ -72,9 +64,7 @@ export default function OnboardingPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  학교명
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">학교명</label>
                 <input
                   type="text"
                   value={formData.schoolName}
@@ -84,9 +74,7 @@ export default function OnboardingPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  담당 과목
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">담당 과목</label>
                 <select
                   value={formData.subject}
                   onChange={(e) => handleInputChange('subject', e.target.value)}
@@ -106,30 +94,23 @@ export default function OnboardingPage() {
             </div>
           </div>
         );
-
       case 2:
         return (
           <div className="space-y-6">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                교육 경험을 알려주세요
-              </h2>
-              <p className="text-gray-600">
-                AI 도구 사용 경험에 따라 맞춤형 가이드를 제공합니다.
-              </p>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">교육 경험을 알려주세요</h2>
+              <p className="text-gray-600">AI 도구 사용 경험에 따라 맞춤형 가이드를 제공합니다.</p>
             </div>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-4">
-                  AI 교육 도구 사용 경험
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-4">AI 교육 도구 사용 경험</label>
                 <div className="space-y-3">
                   {[
                     { value: 'beginner', label: '초보자 (AI 도구를 처음 사용)', icon: '🌱' },
                     { value: 'intermediate', label: '중급자 (몇 번 사용해봤음)', icon: '🌿' },
-                    { value: 'advanced', label: '숙련자 (자주 사용하고 있음)', icon: '🌳' }
-                  ].map(option => (
-                    <label key={option.value} className="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                    { value: 'advanced', label: '숙련자 (자주 사용하고 있음)', icon: '🌳' },
+                  ].map((option) => (
+                    <label className="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50" key={option.value}>
                       <input
                         type="radio"
                         name="experience"
@@ -147,47 +128,27 @@ export default function OnboardingPage() {
             </div>
           </div>
         );
-
       case 3:
         return (
           <div className="space-y-6">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                평가 방식을 선택해주세요
-              </h2>
-              <p className="text-gray-600">
-                선호하는 평가 방식에 따라 AI 시스템을 조정합니다.
-              </p>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">평가 방식을 선택해주세요</h2>
+              <p className="text-gray-600">선호하는 평가 방식에 따라 AI 시스템을 조정합니다.</p>
             </div>
             <div className="space-y-4">
               <div className="grid gap-4">
                 {[
-                  { 
-                    key: 'automated', 
-                    label: '자동 평가', 
-                    description: 'AI가 자동으로 평가하고 피드백 제공',
-                    icon: '🤖'
-                  },
-                  { 
-                    key: 'manual', 
-                    label: '수동 평가', 
-                    description: '선생님이 직접 평가하되 AI가 보조 정보 제공',
-                    icon: '👨‍🏫'
-                  },
-                  { 
-                    key: 'mixed', 
-                    label: '혼합 평가', 
-                    description: 'AI 자동 평가 + 선생님 최종 검토',
-                    icon: '🤝'
-                  }
-                ].map(option => (
-                  <label key={option.key} className="flex items-start p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                  { key: 'automated', label: '자동 평가', description: 'AI가 자동으로 평가하고 피드백 제공', icon: '🤖' },
+                  { key: 'manual', label: '수동 평가', description: '선생님이 직접 평가하되 AI가 보조 정보 제공', icon: '👨‍🏫' },
+                  { key: 'mixed', label: '혼합 평가', description: 'AI 자동 평가 + 선생님 최종 검토', icon: '🤝' },
+                ].map((option) => (
+                  <label className="flex items-start p-4 border rounded-lg cursor-pointer hover:bg-gray-50" key={option.key}>
                     <input
                       type="checkbox"
                       checked={formData.assessmentPreferences[option.key as keyof typeof formData.assessmentPreferences]}
                       onChange={(e) => {
                         const newPrefs = { ...formData.assessmentPreferences };
-                        newPrefs[option.key as keyof typeof newPrefs] = e.target.checked;
+                        newPrefs[option.key as keyof typeof newPrefs] = e.target.checked as any;
                         handleInputChange('assessmentPreferences', newPrefs);
                       }}
                       className="mr-3 mt-1"
@@ -205,17 +166,12 @@ export default function OnboardingPage() {
             </div>
           </div>
         );
-
       case 4:
         return (
           <div className="space-y-6">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                교육 목표를 선택해주세요
-              </h2>
-              <p className="text-gray-600">
-                AI가 목표에 맞는 최적의 교육 솔루션을 제안합니다.
-              </p>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">교육 목표를 선택해주세요</h2>
+              <p className="text-gray-600">AI가 목표에 맞는 최적의 교육 솔루션을 제안합니다.</p>
             </div>
             <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -225,16 +181,16 @@ export default function OnboardingPage() {
                   { value: 'personalization', label: '개인화 학습 제공', icon: '🎯' },
                   { value: 'feedback', label: '즉시 피드백 제공', icon: '💬' },
                   { value: 'analytics', label: '학습 데이터 분석', icon: '📈' },
-                  { value: 'workload', label: '업무 부담 감소', icon: '⚡' }
-                ].map(goal => (
-                  <label key={goal.value} className="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                  { value: 'workload', label: '업무 부담 감소', icon: '⚡' },
+                ].map((goal) => (
+                  <label className="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50" key={goal.value}>
                     <input
                       type="checkbox"
                       checked={formData.goals.includes(goal.value)}
                       onChange={(e) => {
                         const newGoals = e.target.checked
                           ? [...formData.goals, goal.value]
-                          : formData.goals.filter(g => g !== goal.value);
+                          : formData.goals.filter((g) => g !== goal.value);
                         handleInputChange('goals', newGoals);
                       }}
                       className="mr-3"
@@ -247,7 +203,6 @@ export default function OnboardingPage() {
             </div>
           </div>
         );
-
       default:
         return null;
     }
@@ -258,12 +213,10 @@ export default function OnboardingPage() {
       {/* Navigation */}
       <nav className="container mx-auto px-4 py-6">
         <div className="flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold text-blue-600">
-            Teacher AI
+          <Link className="text-2xl font-bold text-blue-600" href="/">
+            달각 Teacher AI
           </Link>
-          <div className="text-sm text-gray-600">
-            {currentStep}/{totalSteps} 단계
-          </div>
+          <div className="text-sm text-gray-600">{currentStep}/{totalSteps} 단계</div>
         </div>
       </nav>
 
@@ -275,10 +228,10 @@ export default function OnboardingPage() {
             <span className="text-sm text-gray-600">{Math.round((currentStep / totalSteps) * 100)}%</span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
-            <div 
+            <div
               className="bg-gradient-to-r from-green-400 to-blue-500 h-2 rounded-full transition-all duration-300"
               style={{ width: `${(currentStep / totalSteps) * 100}%` }}
-            ></div>
+            />
           </div>
         </div>
       </div>
@@ -288,6 +241,21 @@ export default function OnboardingPage() {
         <div className="max-w-2xl mx-auto">
           <div className="bg-white rounded-lg shadow-lg p-8">
             {renderStep()}
+
+            {/* Google Form CTA */}
+            <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-4 flex flex-col sm:flex-row items-center justify-between">
+              <p className="text-sm text-blue-800 mb-3 sm:mb-0">
+                구글폼으로 관심 등록 후, 정식 오픈 소식을 받아보세요.
+              </p>
+              <a
+                className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://forms.gle/"
+              >
+                구글폼 열기
+              </a>
+            </div>
 
             {/* Navigation Buttons */}
             <div className="flex justify-between mt-8 pt-6 border-t">
@@ -313,7 +281,7 @@ export default function OnboardingPage() {
       <footer className="bg-white border-t mt-16">
         <div className="container mx-auto px-4 py-8">
           <div className="text-center text-gray-600">
-            <p>© 2025 Teacher AI Service. 온보딩 과정을 통해 맞춤형 AI 교육 경험을 설정하세요.</p>
+            © 2025 달각 Teacher AI Service. 온보딩 과정을 통해 맞춤형 AI 교육 경험을 설정하세요.
           </div>
         </div>
       </footer>
