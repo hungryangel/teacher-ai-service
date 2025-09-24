@@ -1,7 +1,15 @@
 import { Container, Section, HeadingLG, BodyLG, Card, Grid } from "@/components/ui";
 
+interface Feature {
+  icon: string;
+  title: string;
+  description: string;
+  highlight: string;
+  color: 'primary' | 'success' | 'warning';
+}
+
 export function FeatureCards() {
-  const features = [
+  const features: Feature[] = [
     {
       icon: "🤖",
       title: "스마트 AI 분석",
@@ -36,10 +44,9 @@ export function FeatureCards() {
             복잡한 평가서 작성, 이제 AI가 도와드릴게요
           </BodyLG>
         </div>
-
         <Grid cols={3} gap="lg">
           {features.map((feature, index) => (
-            <FeatureCard key={index} feature={feature} index={index} />
+            <FeatureCard feature={feature} index={index} key={index} />
           ))}
         </Grid>
       </Container>
@@ -47,15 +54,15 @@ export function FeatureCards() {
   );
 }
 
-function FeatureCard({ feature, index }: { feature: any; index: number }) {
-  const colorClasses = {
+function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
+  const colorClasses: Record<Feature['color'], string> = {
     primary: "from-primary-500 to-primary-600",
     success: "from-success-500 to-success-600", 
     warning: "from-warning-500 to-warning-600"
   };
 
   return (
-    <Card 
+    <Card
       hover 
       className={`feature-card animate-fade-in`}
       style={{ animationDelay: `${index * 200}ms` }}
