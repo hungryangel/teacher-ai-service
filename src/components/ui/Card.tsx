@@ -3,13 +3,15 @@ interface CardProps {
   className?: string;
   variant?: 'default' | 'elevated' | 'bordered';
   hover?: boolean;
+  style?: React.CSSProperties;
 }
 
 export function Card({ 
   children, 
   className = '', 
   variant = 'default',
-  hover = false 
+  hover = false,
+  style 
 }: CardProps) {
   const variantClasses = {
     default: 'bg-white rounded-xl',
@@ -20,7 +22,10 @@ export function Card({
   const hoverClasses = hover ? 'hover:shadow-xl hover:-translate-y-1 transition-all duration-300' : '';
 
   return (
-    <div className={`${variantClasses[variant]} ${hoverClasses} ${className}`}>
+    <div 
+      className={`${variantClasses[variant]} ${hoverClasses} ${className}`}
+      style={style}
+    >
       {children}
     </div>
   );
