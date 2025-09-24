@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { TeacherReportGenerator, TeacherReportData } from '@/lib/ai-modules/report-generator';
+import { TeacherReportGenerator, TeacherReportData } from '@/lib/ai-modules';
 
 export async function POST(request: NextRequest) {
   console.log('🚀 보육교사 AI 평가서 생성 API 시작');
-
+  
   try {
     const requestData: TeacherReportData = await request.json();
-
+    
     // 입력 검증
     if (!requestData.childInfo?.name || !requestData.childInfo?.age) {
       return NextResponse.json(
@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-
+    
     // 관찰 내용 기본값 설정
     const completeData: TeacherReportData = {
       ...requestData,
@@ -26,20 +26,21 @@ export async function POST(request: NextRequest) {
         nature: requestData.observations.nature || '자연과 과학에 호기심을 가집니다.'
       }
     };
-
+    
     const generator = TeacherReportGenerator.getInstance();
     const result = await generator.generateReport(completeData);
-
+    
     console.log(`✅ 평가서 생성 완료 - ${result.metadata.wordCount}자`);
-
+    
     return NextResponse.json({
       success: true,
       report: result.report,
       metadata: result.metadata
     });
-
+    
   } catch (error) {
     console.error('❌ 평가서 생성 오류:', error);
+    
     return NextResponse.json(
       { 
         error: '평가서 생성 중 오류가 발생했습니다.',
