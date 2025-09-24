@@ -1,11 +1,12 @@
 'use client';
-
 import React, { useState } from 'react';
 import Link from 'next/link';
 
-// Simple mock components to simulate the experience flow
+// 프롬프트 빌더 컴포넌트
 function SamplePromptBuilder({ onRun }: { onRun: (text: string) => void }) {
-  const [prompt, setPrompt] = useState('학생의 서술형 답안을 평가하고 피드백을 생성해줘. 기준: 논리성, 정확성, 표현력');
+  const [prompt, setPrompt] = useState(
+    '학생의 서술형 답안을 평가하고 피드백을 생성해줘. 기준: 논리성, 정확성, 표현력'
+  );
   return (
     <div className="bg-white rounded-lg p-6 shadow-sm">
       <h3 className="text-lg font-semibold mb-3">프롬프트 빌더</h3>
@@ -26,8 +27,11 @@ function SamplePromptBuilder({ onRun }: { onRun: (text: string) => void }) {
   );
 }
 
+// 학생 답안 입력 컴포넌트
 function SampleStudentAnswer({ onEvaluate }: { onEvaluate: (answer: string) => void }) {
-  const [answer, setAnswer] = useState('지구 온난화는 온실가스 증가로 인해 지구 평균 기온이 상승하는 현상입니다...');
+  const [answer, setAnswer] = useState(
+    '지구 온난화는 온실가스 증가로 인해 지구 평균 기온이 상승하는 현상입니다...'
+  );
   return (
     <div className="bg-white rounded-lg p-6 shadow-sm">
       <h3 className="text-lg font-semibold mb-3">학생 답안</h3>
@@ -48,9 +52,9 @@ function SampleStudentAnswer({ onEvaluate }: { onEvaluate: (answer: string) => v
   );
 }
 
+// 결과 컴포넌트 (모의)
 function SampleResult({ prompt, answer }: { prompt: string; answer: string }) {
   if (!prompt || !answer) return null;
-  // Mock scoring
   const score = 86;
   return (
     <div className="bg-white rounded-lg p-6 shadow-sm">
@@ -76,10 +80,10 @@ export default function ExperiencePage() {
       {/* Navigation */}
       <nav className="container mx-auto px-4 py-6">
         <div className="flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold text-purple-600">
-            Teacher AI
+          <Link className="text-2xl font-bold text-purple-600" href="/">
+            달각 Teacher AI
           </Link>
-          <Link href="/onboarding" className="text-gray-600 hover:text-purple-600">
+          <Link className="text-gray-600 hover:text-purple-600" href="/onboarding">
             온보딩으로 돌아가기
           </Link>
         </div>
@@ -113,9 +117,7 @@ export default function ExperiencePage() {
 
       <footer className="bg-white border-t mt-16">
         <div className="container mx-auto px-4 py-8">
-          <div className="text-center text-gray-600">
-            <p>© 2025 Teacher AI Service. Demo experience page.</p>
-          </div>
+          <div className="text-center text-gray-600">© 2025 달각 Teacher AI Service. Demo experience page.</div>
         </div>
       </footer>
     </div>
