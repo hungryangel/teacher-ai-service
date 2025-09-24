@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from 'react';
 
 interface FormData {
@@ -64,7 +63,7 @@ export function ExperienceForm() {
       setFormData(prev => ({
         ...prev,
         [parent]: {
-          ...prev[parent as keyof FormData] as Record<string, any>),
+          ...prev[parent as keyof FormData] as Record<string, any>,
           [child]: value
         }
       }));
