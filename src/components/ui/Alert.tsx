@@ -1,3 +1,5 @@
+import React, { ReactNode } from 'react';
+
 interface AlertProps {
   children: ReactNode;
   variant?: 'info' | 'success' | 'warning' | 'error';
